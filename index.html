@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimalist MD Reader</title>
+    <!-- Use a simple, un-styled font for a clean aesthetic -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+    <style>
+        /*
+         * Minimalist Brutalist CSS
+         * ------------------------
+         * - Sharp corners and strong borders
+         * - Limited color palette
+         * - Emphasis on structure and typography
+         */
+
+        :root {
+            --bg-color: #f0f0f0;
+            --text-color: #222;
+            --accent-color: #a00; /* A bold, strong color */
+            --border-color: #000;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Container for the main content to give it a brutalist block feel */
+        .content-block {
+            max-width: 700px;
+            width: 90%;
+            margin: 40px 0;
+            padding: 24px;
+            background-color: white;
+            border: 2px solid var(--border-color);
+            box-shadow: 6px 6px 0px var(--border-color); /* Offset shadow for brutalist effect */
+        }
+
+        header {
+            width: 100%;
+            padding: 24px;
+            background-color: var(--accent-color);
+            color: white;
+            text-align: center;
+            border-bottom: 2px solid var(--border-color);
+            text-transform: uppercase;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        /* --- Markdown element styling --- */
+        .markdown-container h1, .markdown-container h2, .markdown-container h3 {
+            color: var(--accent-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-top: 32px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .markdown-container p {
+            margin-top: 0;
+        }
+
+        .markdown-container a {
+            color: var(--accent-color);
+            text-decoration: none;
+            border-bottom: 1px solid var(--accent-color);
+        }
+
+        .markdown-container a:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .markdown-container ul, .markdown-container ol {
+            padding-left: 20px;
+        }
+
+        .markdown-container pre {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 16px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            font-family: 'SFMono-Regular', Consolas, monospace;
+        }
+
+        .markdown-container code {
+            background-color: #ddd;
+            padding: 2px 4px;
+            font-family: 'SFMono-Regular', Consolas, monospace;
+        }
+
+        .markdown-container blockquote {
+            border-left: 4px solid var(--accent-color);
+            margin: 16px 0;
+            padding-left: 16px;
+            color: #555;
+            font-style: italic;
+        }
+
+        .markdown-container img {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid var(--border-color);
+            box-shadow: 4px 4px 0px var(--border-color);
+            display: block;
+        }
+        
+        .loading {
+            text-align: center;
+            color: #888;
+        }
+        
+        .error {
+            text-align: center;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+            border-top: 2px solid var(--border-color);
+            background-color: var(--border-color);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+   
+    <main class="content-block">
+        <div id="markdown-container" class="markdown-container">
+            <p class="loading">Loading content...</p>
+        </div>
+    </main>
+    
+    
+
+    <!-- Marked.js library for converting Markdown to HTML -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('markdown-container');
+            const markdownFilePath = 'resume.md'; // The name of your Markdown file
+
+            fetch(markdownFilePath)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(markdownText => {
+                    // Use marked.parse() to convert the Markdown to HTML
+                    container.innerHTML = marked.parse(markdownText);
+                })
+                .catch(error => {
+                    console.error('Error fetching or parsing Markdown:', error);
+                    container.innerHTML = '<p class="error">Failed to load content. Make sure `content.md` exists in the same folder.</p>';
+                });
+        });
+    </script>
+</body>
+</html>
