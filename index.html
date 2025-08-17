@@ -1,183 +1,605 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minimalist MD Reader</title>
-    <!-- Use a simple, un-styled font for a clean aesthetic -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+    <title>Mayur Ravindra Mane - Resume</title>
     <style>
-        /*
-         * Minimalist Brutalist CSS
-         * ------------------------
-         * - Sharp corners and strong borders
-         * - Limited color palette
-         * - Emphasis on structure and typography
-         */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;200;300;400;500;600;700&display=swap');
 
-        :root {
-            --bg-color: #f0f0f0;
-            --text-color: #222;
-            --accent-color: #a00; /* A bold, strong color */
-            --border-color: #000;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 400;
             line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            color: #2c2c2c;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 20px;
             min-height: 100vh;
         }
 
-        /* Container for the main content to give it a brutalist block feel */
-        .content-block {
-            max-width: 700px;
-            width: 90%;
-            margin: 40px 0;
-            padding: 24px;
-            background-color: white;
-            border: 2px solid var(--border-color);
-            box-shadow: 6px 6px 0px var(--border-color); /* Offset shadow for brutalist effect */
+        .resume-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 
+                0 20px 40px rgba(0,0,0,0.08),
+                0 0 0 1px rgba(0,0,0,0.05);
+            border-radius: 12px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
         }
 
-        header {
-            width: 100%;
-            padding: 24px;
-            background-color: var(--accent-color);
-            color: white;
+        .resume-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #495057 0%, #6c757d 100%);
+        }
+
+        .resume-container::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, rgba(73, 80, 87, 0.03) 0%, rgba(108, 117, 125, 0.03) 100%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .header {
             text-align: center;
-            border-bottom: 2px solid var(--border-color);
-            text-transform: uppercase;
+            margin-bottom: 35px;
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 25px;
+            position: relative;
+            z-index: 1;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-            letter-spacing: 2px;
-            font-weight: 700;
+        .name-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
         }
 
-        /* --- Markdown element styling --- */
-        .markdown-container h1, .markdown-container h2, .markdown-container h3 {
-            color: var(--accent-color);
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 8px;
-            margin-top: 32px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .markdown-container p {
-            margin-top: 0;
-        }
-
-        .markdown-container a {
-            color: var(--accent-color);
-            text-decoration: none;
-            border-bottom: 1px solid var(--accent-color);
-        }
-
-        .markdown-container a:hover {
-            background-color: var(--accent-color);
+        .avatar-placeholder {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: white;
+            font-size: 32px;
+            font-weight: 300;
+            box-shadow: 0 8px 20px rgba(73, 80, 87, 0.2);
+            border: 3px solid white;
         }
 
-        .markdown-container ul, .markdown-container ol {
+        .name {
+            font-size: 42px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #495057;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px 35px;
+            max-width: 550px;
+            margin: 0 auto;
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .contact-item {
+            color: #495057;
+            padding: 10px 15px;
+            background: rgba(73, 80, 87, 0.04);
+            border-radius: 8px;
+            border-left: 3px solid #6c757d;
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+        }
+
+        /* .contact-item:hover {
+            background: rgba(73, 80, 87, 0.08);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(73, 80, 87, 0.15);
+        } */
+
+        .contact-item a {
+            color: #495057;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: #6c757d;
+        }
+
+        .section {
+            margin-bottom: 35px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-title {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 16px;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            padding: 14px 22px;
+            background: linear-gradient(135deg, rgba(73, 80, 87, 0.06) 0%, rgba(108, 117, 125, 0.06) 100%);
+            border-left: 4px solid #6c757d;
+            border-radius: 0 8px 8px 0;
+            color: #495057;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(73, 80, 87, 0.08);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, #6c757d, #495057);
+            border-radius: 1px;
+        }
+
+        .collapsible {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .collapsible:hover {
+            background: linear-gradient(135deg, rgba(73, 80, 87, 0.08) 0%, rgba(108, 117, 125, 0.08) 100%);
+        }
+
+        .collapsible::before {
+            content: '▼';
+            float: right;
+            margin-right: 45px;
+            color: #6c757d;
+            font-size: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .collapsible.collapsed::before {
+            transform: rotate(-90deg);
+        }
+
+        .collapsible-content {
+            max-height: 1000px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .collapsible-content.hidden {
+            max-height: 0;
+            margin-bottom: 0;
+        }
+
+        .section-content {
             padding-left: 20px;
         }
 
-        .markdown-container pre {
-            background-color: var(--bg-color);
-            border: 1px solid var(--border-color);
-            padding: 16px;
-            overflow-x: auto;
-            white-space: pre-wrap;
-            font-family: 'SFMono-Regular', Consolas, monospace;
-        }
-
-        .markdown-container code {
-            background-color: #ddd;
-            padding: 2px 4px;
-            font-family: 'SFMono-Regular', Consolas, monospace;
-        }
-
-        .markdown-container blockquote {
-            border-left: 4px solid var(--accent-color);
-            margin: 16px 0;
-            padding-left: 16px;
+        .professional-summary p {
+            text-align: justify;
             color: #555;
-            font-style: italic;
         }
 
-        .markdown-container img {
-            max-width: 100%;
-            height: auto;
-            border: 2px solid var(--border-color);
-            box-shadow: 4px 4px 0px var(--border-color);
-            display: block;
+        .skills-list {
+            list-style: none;
         }
-        
-        .loading {
-            text-align: center;
-            color: #888;
+
+        .skills-list li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 15px;
         }
-        
-        .error {
-            text-align: center;
-            color: var(--accent-color);
+
+        .skills-list li::before {
+            content: "●";
+            position: absolute;
+            left: 0;
+            color: #333;
             font-weight: bold;
         }
 
-        footer {
-            width: 100%;
-            text-align: center;
-            padding: 20px;
-            margin-top: auto;
-            border-top: 2px solid var(--border-color);
-            background-color: var(--border-color);
+        .experience-item {
+            margin-bottom: 30px;
+            padding: 22px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(73, 80, 87, 0.08);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .experience-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(73, 80, 87, 0.12);
+        }
+
+        .experience-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .job-header {
+            margin-bottom: 12px;
+        }
+
+        .job-title {
+            font-weight: bold;
+            font-size: 15px;
+            text-transform: uppercase;
+            color: #333;
+        }
+
+        .company-period {
+            color: #666;
+            font-size: 14px;
+            margin-top: 2px;
+        }
+
+        .job-responsibilities {
+            list-style: none;
+            margin-top: 10px;
+        }
+
+        .job-responsibilities li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 15px;
+            text-align: justify;
+            color: #555;
+        }
+
+        .job-responsibilities li::before {
+            content: "●";
+            position: absolute;
+            left: 0;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .project-info {
+            background: linear-gradient(135deg, rgba(73, 80, 87, 0.03) 0%, rgba(108, 117, 125, 0.03) 100%);
+            padding: 16px 20px;
+            margin: 12px 0;
+            border-left: 3px solid #6c757d;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 8px rgba(73, 80, 87, 0.05);
+            position: relative;
+        }
+
+        .project-info::before {
+            content: '';
+            position: absolute;
+            left: -3px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #6c757d 0%, #495057 100%);
+        }
+
+        .project-name {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .education-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 18px;
+            margin: 10px 0;
+            background: rgba(73, 80, 87, 0.02);
+            border-radius: 8px;
+            border-left: 3px solid #6c757d;
+            transition: all 0.3s ease;
+        }
+
+        .education-item:hover {
+            background: rgba(73, 80, 87, 0.04);
+            transform: translateX(5px);
+        }
+
+        .education-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #495057;
             color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px 12px;
+            position: absolute;
+            z-index: 1000;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #495057 transparent transparent transparent;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .education-details {
+            font-weight: bold;
+        }
+
+        .education-year {
+            color: #666;
+            font-weight: bold;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: #ddd;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .resume-container {
+                padding: 20px;
+            }
+            
+            .contact-info {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .name-section {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .name {
+                font-size: 28px;
+                letter-spacing: 2px;
+            }
+
+            .avatar-placeholder {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+            
+            .education-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+
+            .section-title::after {
+                display: none;
+            }
+
+            .collapsible::before {
+                margin-right: 10px;
+            }
+        }
+
+        .emoji {
+            margin-right: 8px;
+            font-style: normal;
         }
     </style>
 </head>
 <body>
-   
-    <main class="content-block">
-        <div id="markdown-container" class="markdown-container">
-            <p class="loading">Loading content...</p>
-        </div>
-    </main>
-    
-    
+    <div class="resume-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="name-section">
+                <div class="avatar-placeholder" title="Profile Photo">
+                    <img src="profile.jpg" alt="Profile Photo" height="100" width="100" style="border-radius: 2em;"/>
+                </div>
+                <h1 class="name">Mayur Ravindra Mane</h1>
+            </div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span class="emoji">📱</span>+91 70387 59302
+                </div>
+                <div class="contact-item">
+                    <span class="emoji">💼</span><a href="https://linkedin.com/in/mayurravindram">linkedin.com/in/mayurravindram</a>
+                </div>
+                <div class="contact-item">
+                    <span class="emoji">✉️</span><a href="mailto:mayurravindram@gmail.com">mayurravindram@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <span class="emoji">🔗</span><a href="https://github.com/mayur-ravindram">github.com/mayur-ravindram</a>
+                </div>
+            </div>
+        </header>
 
-    <!-- Marked.js library for converting Markdown to HTML -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+        <!-- Professional Summary -->
+        <section class="section">
+            <h2 class="section-title collapsible" onclick="toggleSection(this)">
+                <span class="emoji">🎯</span>Professional Summary
+            </h2>
+            <div class="section-content professional-summary collapsible-content">
+                <p>Highly accomplished Java Backend Engineer with nearly 8 years of experience in architecting, developing, and optimizing robust, scalable, and efficient software solutions. Proficient in core Java concepts, Spring Boot, microservices, and cloud technologies including Docker, Kubernetes, and GCP. Proven ability to lead development cycles, mentor junior developers, and collaborate effectively with clients to deliver high-quality enterprise applications.</p>
+            </div>
+        </section>
+
+        <!-- Technical Skills -->
+        <section class="section">
+            <h2 class="section-title collapsible" onclick="toggleSection(this)">
+                <span class="emoji">🛠️</span>Technical Skills
+            </h2>
+            <div class="section-content collapsible-content">
+                <ul class="skills-list">
+                    <li><strong>Languages:</strong> <span class="tooltip">Java 8/11/17<span class="tooltiptext">8+ years of Java development experience</span></span>, JavaScript, HTML, CSS.</li>
+                    <li><strong>Frameworks & Libraries:</strong> Spring Boot, Spring, React, TailwindCSS.</li>
+                    <li><strong>Database:</strong> <span class="tooltip">MySQL<span class="tooltiptext">Relational database expertise</span></span>, <span class="tooltip">MongoDB<span class="tooltiptext">NoSQL document database</span></span>.</li>
+                    <li><strong>Cloud & Containerization:</strong> <span class="tooltip">GCP<span class="tooltiptext">Google Cloud Platform</span></span>, Docker, Kubernetes.</li>
+                    <li><strong>Tools & Methodologies:</strong> Microservices Architecture, RESTful APIs, Git, Maven, JUnit, Mockito, CI/CD, Postman, Swagger.</li>
+                </ul>
+            </div>
+        </section>
+
+        
+        <!-- Experience -->
+        <section class="section">
+            <h2 class="section-title collapsible" onclick="toggleSection(this)">
+                <span class="emoji">💼</span>Experience
+            </h2>
+            <div class="section-content collapsible-content">
+                
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div class="job-title"><span class="emoji">🚀</span>Associate Sr. Software Developer | Publicis Sapient</div>
+                        <div class="company-period">[2022 – Present]</div>
+                    </div>
+                    <ul class="job-responsibilities">
+                        <li><span class="emoji">🎯</span>Led the development, maintenance, and documentation of the life cycle for critical investment and banking products for a major UK client (Lloyds Banking Group).</li>
+                        <li><span class="emoji">👥</span>Provided technical guidance and mentorship to junior developers on best practices, testing strategies, and API specification documentation.</li>
+                        <li><span class="emoji">⚡</span>Drove agile development and fostered team collaboration through active participation in Scrum ceremonies, contributing to consistent on-time delivery of features.</li>
+                    </ul>
+                    
+                    <div class="project-info">
+                        <div class="project-name"><span class="emoji">💰</span>MBNA Savings (March 2023 – Present):</div>
+                        <p>Developed and maintained backend services for a Fixed Term 1 Year banking product using Java 8/17, Spring 5.0, and Spring Boot 2.7/3.0.</p>
+                    </div>
+                    
+                    <div class="project-info">
+                        <div class="project-name"><span class="emoji">💳</span>BNPL Instalments Product (October 2022 – March 2023):</div>
+                        <p>Engineered robust backend solutions for a mobile-first Buy Now Pay Later (BNPL) instalment product, utilizing Java 11, Spring 5.0, and Spring Boot 2.5, hosted on GCP.</p>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div class="job-title"><span class="emoji">⚙️</span>Sr. Technical Engineer | Opus Consulting</div>
+                        <div class="company-period">[2021 – 2022]</div>
+                    </div>
+                    <ul class="job-responsibilities">
+                        <li><span class="emoji">🔍</span>Gained comprehensive insights into diverse technologies and processes, including data ingestion, payment reconciliation, and financial reporting.</li>
+                        <li><span class="emoji">🤝</span>Collaborated directly with clients to understand requirements, define scope, and translate business needs into technical specifications.</li>
+                    </ul>
+                    
+                    <div class="project-info">
+                        <div class="project-name"><span class="emoji">📊</span>Optimus Recon Pro (August 2021 – July 2022):</div>
+                        <p>Contributed to the development of a SaaS, multi-tenant back-office suite, Optimus, providing solutions for Data Injection, Reconciliation, and Payment Insights using Java 8, Spring Boot 2.5, MongoDB, Docker, and Kubernetes.</p>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div class="job-title"><span class="emoji">💻</span>Analyst, Software Developer | TIAA India | Pune, India</div>
+                        <div class="company-period">[2017 – 2021]</div>
+                    </div>
+                    <ul class="job-responsibilities">
+                        <li><span class="emoji">🌱</span>Developed foundational understanding of enterprise web applications, software development life cycles, and Scrum methodologies as a fresher.</li>
+                    </ul>
+                    
+                    <div class="project-info">
+                        <div class="project-name"><span class="emoji">🏦</span>Enterprise Payments Platform (February 2017 – July 2021):</div>
+                        <p>Played a key role in developing TIAA's internal payment platform for managing transfers across brokerage, retirement, and bank products.</p>
+                        <p style="margin-top: 8px;"><span class="emoji">☁️</span>Developed and deployed microservices and Mule proxies to the OpenShift cloud platform, utilizing Java 8, Spring Boot, and Spring Batch.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education -->
+        <section class="section">
+            <h2 class="section-title collapsible" onclick="toggleSection(this)">
+                <span class="emoji">🎓</span>Education
+            </h2>
+            <div class="section-content collapsible-content">
+                <div class="education-item">
+                    <div class="education-details"><span class="emoji">📜</span>PG Diploma in Advanced Computing | CDAC | India</div>
+                    <div class="education-year">2016 – 2017</div>
+                </div>
+                <div class="education-item">
+                    <div class="education-details"><span class="emoji">🎯</span>B.E. Computer Engineering | Mumbai University | India</div>
+                    <div class="education-year">2011 – 2016</div>
+                </div>
+                <div class="education-item">
+                    <div class="education-details"><span class="emoji">📚</span>H.S.C | Maharashtra State Board | India</div>
+                    <div class="education-year">2009 – 2011</div>
+                </div>
+                <div class="education-item">
+                    <div class="education-details"><span class="emoji">📖</span>S.S.C | Maharashtra State Board | India</div>
+                    <div class="education-year">2009</div>
+                </div>
+            </div>
+        </section>
+    </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const container = document.getElementById('markdown-container');
-            const markdownFilePath = 'resume.md'; // The name of your Markdown file
+        function toggleSection(element) {
+            const content = element.nextElementSibling;
+            const isCollapsed = element.classList.contains('collapsed');
+            
+            if (isCollapsed) {
+                element.classList.remove('collapsed');
+                content.classList.remove('hidden');
+            } else {
+                element.classList.add('collapsed');
+                content.classList.add('hidden');
+            }
+        }
 
-            fetch(markdownFilePath)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.text();
-                })
-                .then(markdownText => {
-                    // Use marked.parse() to convert the Markdown to HTML
-                    container.innerHTML = marked.parse(markdownText);
-                })
-                .catch(error => {
-                    console.error('Error fetching or parsing Markdown:', error);
-                    container.innerHTML = '<p class="error">Failed to load content. Make sure `content.md` exists in the same folder.</p>';
-                });
+        // Initialize all sections as expanded
+        document.addEventListener('DOMContentLoaded', function() {
+            const collapsibles = document.querySelectorAll('.collapsible');
+            collapsibles.forEach(function(collapsible) {
+                collapsible.classList.remove('collapsed');
+            });
         });
     </script>
 </body>
