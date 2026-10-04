@@ -1,606 +1,263 @@
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mayur Ravindra Mane - Resume</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;200;300;400;500;600;700&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Roboto Mono', monospace;
-            font-weight: 400;
-            line-height: 1.6;
-            color: #2c2c2c;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 20px;
-            min-height: 100vh;
-        }
-
-        .resume-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            box-shadow: 
-                0 20px 40px rgba(0,0,0,0.08),
-                0 0 0 1px rgba(0,0,0,0.05);
-            border-radius: 12px;
-            padding: 40px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .resume-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #495057 0%, #6c757d 100%);
-        }
-
-        .resume-container::after {
-            content: '';
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, rgba(73, 80, 87, 0.03) 0%, rgba(108, 117, 125, 0.03) 100%);
-            border-radius: 50%;
-            z-index: 0;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 35px;
-            border-bottom: 2px solid #dee2e6;
-            padding-bottom: 25px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .name-section {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-
-        .avatar-placeholder {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 32px;
-            font-weight: 300;
-            box-shadow: 0 8px 20px rgba(73, 80, 87, 0.2);
-            border: 3px solid white;
-        }
-
-        .name {
-            font-size: 42px;
-            font-weight: 700;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: #495057;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .contact-info {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px 35px;
-            max-width: 550px;
-            margin: 0 auto;
-            font-family: 'Roboto Mono', monospace;
-            font-weight: 600;
-            font-size: 13px;
-        }
-
-        .contact-item {
-            color: #495057;
-            padding: 10px 15px;
-            background: rgba(73, 80, 87, 0.04);
-            border-radius: 8px;
-            border-left: 3px solid #6c757d;
-            transition: all 0.3s ease;
-            text-align: center;
-            position: relative;
-        }
-
-        /* .contact-item:hover {
-            background: rgba(73, 80, 87, 0.08);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(73, 80, 87, 0.15);
-        } */
-
-        .contact-item a {
-            color: #495057;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .contact-item a:hover {
-            color: #6c757d;
-        }
-
-        .section {
-            margin-bottom: 35px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .section-title {
-            font-family: 'Roboto Mono', monospace;
-            font-size: 16px;
-            font-weight: 300;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            padding: 14px 22px;
-            background: linear-gradient(135deg, rgba(73, 80, 87, 0.06) 0%, rgba(108, 117, 125, 0.06) 100%);
-            border-left: 4px solid #6c757d;
-            border-radius: 0 8px 8px 0;
-            color: #495057;
-            position: relative;
-            box-shadow: 0 2px 8px rgba(73, 80, 87, 0.08);
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 40px;
-            height: 2px;
-            background: linear-gradient(90deg, #6c757d, #495057);
-            border-radius: 1px;
-        }
-
-        .collapsible {
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .collapsible:hover {
-            background: linear-gradient(135deg, rgba(73, 80, 87, 0.08) 0%, rgba(108, 117, 125, 0.08) 100%);
-        }
-
-        .collapsible::before {
-            content: '▼';
-            float: right;
-            margin-right: 45px;
-            color: #6c757d;
-            font-size: 12px;
-            transition: transform 0.3s ease;
-        }
-
-        .collapsible.collapsed::before {
-            transform: rotate(-90deg);
-        }
-
-        .collapsible-content {
-            max-height: 1000px;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        .collapsible-content.hidden {
-            max-height: 0;
-            margin-bottom: 0;
-        }
-
-        .section-content {
-            padding-left: 20px;
-        }
-
-        .professional-summary p {
-            text-align: justify;
-            color: #555;
-        }
-
-        .skills-list {
-            list-style: none;
-        }
-
-        .skills-list li {
-            margin-bottom: 8px;
-            position: relative;
-            padding-left: 15px;
-        }
-
-        .skills-list li::before {
-            content: "●";
-            position: absolute;
-            left: 0;
-            color: #333;
-            font-weight: bold;
-        }
-
-        .experience-item {
-            margin-bottom: 30px;
-            padding: 22px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-            border: 1px solid rgba(73, 80, 87, 0.08);
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .experience-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(73, 80, 87, 0.12);
-        }
-
-        .experience-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .job-header {
-            margin-bottom: 12px;
-        }
-
-        .job-title {
-            font-weight: bold;
-            font-size: 15px;
-            text-transform: uppercase;
-            color: #333;
-        }
-
-        .company-period {
-            color: #666;
-            font-size: 14px;
-            margin-top: 2px;
-        }
-
-        .job-responsibilities {
-            list-style: none;
-            margin-top: 10px;
-        }
-
-        .job-responsibilities li {
-            margin-bottom: 8px;
-            position: relative;
-            padding-left: 15px;
-            text-align: justify;
-            color: #555;
-        }
-
-        .job-responsibilities li::before {
-            content: "●";
-            position: absolute;
-            left: 0;
-            color: #333;
-            font-weight: bold;
-        }
-
-        .project-info {
-            background: linear-gradient(135deg, rgba(73, 80, 87, 0.03) 0%, rgba(108, 117, 125, 0.03) 100%);
-            padding: 16px 20px;
-            margin: 12px 0;
-            border-left: 3px solid #6c757d;
-            border-radius: 0 8px 8px 0;
-            box-shadow: 0 2px 8px rgba(73, 80, 87, 0.05);
-            position: relative;
-        }
-
-        .project-info::before {
-            content: '';
-            position: absolute;
-            left: -3px;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(180deg, #6c757d 0%, #495057 100%);
-        }
-
-        .project-name {
-            font-weight: bold;
-            color: #333;
-        }
-
-        .education-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 14px 18px;
-            margin: 10px 0;
-            background: rgba(73, 80, 87, 0.02);
-            border-radius: 8px;
-            border-left: 3px solid #6c757d;
-            transition: all 0.3s ease;
-        }
-
-        .education-item:hover {
-            background: rgba(73, 80, 87, 0.04);
-            transform: translateX(5px);
-        }
-
-        .education-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .tooltip {
-            position: relative;
-            display: inline-block;
-            cursor: help;
-        }
-
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 200px;
-            background-color: #495057;
-            color: white;
-            text-align: center;
-            border-radius: 6px;
-            padding: 8px 12px;
-            position: absolute;
-            z-index: 1000;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -100px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            font-size: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-
-        .tooltip .tooltiptext::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: #495057 transparent transparent transparent;
-        }
-
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        .education-details {
-            font-weight: bold;
-        }
-
-        .education-year {
-            color: #666;
-            font-weight: bold;
-        }
-
-        .divider {
-            height: 1px;
-            background-color: #ddd;
-            margin: 20px 0;
-        }
-
-        @media (max-width: 768px) {
-            .resume-container {
-                padding: 20px;
-            }
-            
-            .contact-info {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-            
-            .name-section {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .name {
-                font-size: 28px;
-                letter-spacing: 2px;
-            }
-
-            .avatar-placeholder {
-                width: 60px;
-                height: 60px;
-                font-size: 24px;
-            }
-            
-            .education-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 5px;
-            }
-
-            .section-title::after {
-                display: none;
-            }
-
-            .collapsible::before {
-                margin-right: 10px;
-            }
-        }
-
-        .emoji {
-            margin-right: 8px;
-            font-style: normal;
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Mayur Ravindra — Product Engineer building reliable software for complicated problems.">
+  <meta name="theme-color" content="#f6f5f1">
+  <meta property="og:title" content="Mayur Ravindra — Product Engineer">
+  <meta property="og:description" content="I turn complicated business problems into simple, dependable software.">
+  <meta property="og:type" content="website">
+  <title>Mayur Ravindra — Product Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <div class="resume-container">
-        <!-- Header -->
-        <header class="header">
-            <div class="name-section">
-                <div class="avatar-placeholder" title="Profile Photo">
-                    <img src="profile.jpg" alt="Profile Photo" height="100" width="100" style="border-radius: 2em;"/>
-                </div>
-                <h1 class="name">Mayur Ravindra Mane</h1>
-            </div>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <span class="emoji">📱</span>+91 70387 59302
-                </div>
-                <div class="contact-item">
-                    <span class="emoji">💼</span><a href="https://linkedin.com/in/mayurravindram">linkedin.com/in/mayurravindram</a>
-                </div>
-                <div class="contact-item">
-                    <span class="emoji">✉️</span><a href="mailto:mayurravindram@gmail.com">mayurravindram@gmail.com</a>
-                </div>
-                <div class="contact-item">
-                    <span class="emoji">🔗</span><a href="https://github.com/mayur-ravindram">github.com/mayur-ravindram</a>
-                </div>
-            </div>
-        </header>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-        <!-- Professional Summary -->
-        <section class="section">
-            <h2 class="section-title collapsible" onclick="toggleSection(this)">
-                <span class="emoji">🎯</span>Professional Summary
-            </h2>
-            <div class="section-content professional-summary collapsible-content">
-                <p>Highly accomplished Java Backend Engineer with nearly 8 years of experience in architecting, developing, and optimizing robust, scalable, and efficient software solutions. Proficient in core Java concepts, Spring Boot, microservices, and cloud technologies including Docker, Kubernetes, and GCP. Proven ability to lead development cycles, mentor junior developers, and collaborate effectively with clients to deliver high-quality enterprise applications.</p>
+  <header class="site-header" data-header>
+    <div class="container nav-wrap">
+      <a class="brand" href="#top" aria-label="Mayur Ravindra home">MR<span>.</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation">
+        <span></span><span></span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Primary">
+        <a href="#work">Work</a>
+        <a href="#lab">Lab</a>
+        <a href="#thinking">Thinking</a>
+        <a href="#about">About</a>
+        <a class="nav-cta" href="resume.html">Résumé</a>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark theme" aria-pressed="false"><span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">Dark</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section id="top" class="hero section">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">PRODUCT ENGINEER · BACKEND SYSTEMS · PRODUCT THINKING</p>
+          <h1>I turn complicated business problems into <em>simple, dependable software.</em></h1>
+          <p class="hero-lede">Backend-focused engineer with experience across financial systems, banking products and SaaS. I enjoy understanding messy requirements, visualising simpler solutions, and staying close enough to the work to make things actually ship.</p>
+          <div class="hero-actions">
+            <a class="button button-dark" href="#work">View selected work <span>↗</span></a>
+            <a class="text-link" href="resume.html">Download résumé <span>↘</span></a>
+          </div>
+        </div>
+        <div class="hero-note reveal reveal-delay-1">
+          <div class="note-rule"></div>
+          <p class="mono-label">A SIMPLE RULE</p>
+          <p class="note-copy">Understand the real problem.<br>Remove unnecessary complexity.<br>Build the smallest useful system.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="signal section-tight">
+      <div class="container signal-grid">
+        <div><strong>9+</strong><span>years building software</span></div>
+        <div><strong>4</strong><span>financial / banking domains</span></div>
+        <div><strong>5</strong><span>engineers currently led</span></div>
+        <div><strong>∞</strong><span>messy problems to simplify</span></div>
+      </div>
+    </section>
+
+    <section class="principles section" id="thinking">
+      <div class="container split-heading">
+        <div>
+          <p class="eyebrow">01 · HOW I WORK</p>
+          <h2>Simple systems are<br>harder than clever ones.</h2>
+        </div>
+        <div class="intro-copy">
+          <p>I work best where requirements are incomplete, systems have history, and somebody still needs to make the thing work.</p>
+          <p>I like making complexity visible first—then reducing it until the team can move with confidence.</p>
+        </div>
+      </div>
+      <div class="container principles-grid">
+        <article><span>01</span><h3>Understand</h3><p>Get the questions answered before committing to a solution.</p></article>
+        <article><span>02</span><h3>Visualise</h3><p>Turn ambiguous requirements into flows, boundaries and decisions people can reason about.</p></article>
+        <article><span>03</span><h3>Simplify</h3><p>Remove unnecessary moving parts instead of decorating them with more abstraction.</p></article>
+        <article><span>04</span><h3>Ship</h3><p>Stay engaged through testing, blockers, release and the reality of production.</p></article>
+      </div>
+    </section>
+
+    <section id="work" class="work section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow">02 · SELECTED WORK</p>
+          <h2>Four chapters in learning<br>how complex systems behave.</h2>
+        </div>
+
+        <div class="case-list">
+          <article class="case-card reveal">
+            <div class="case-index">01</div>
+            <div class="case-body">
+              <div class="case-meta">TIAA INDIA · 2017—2021</div>
+              <h3>Enterprise Payments</h3>
+              <p class="case-kicker">Learning to build software that moves money.</p>
+              <p>Built and supported Java microservices, batch jobs and settlement workflows behind internal and brokerage payments. Four and a half years here taught me the realities of financial systems: changing requirements, production incidents, business rules and the cost of getting small details wrong.</p>
+              <div class="tags"><span>Java</span><span>Microservices</span><span>Batch</span><span>FinTech</span></div>
             </div>
-        </section>
+          </article>
 
-        <!-- Technical Skills -->
-        <section class="section">
-            <h2 class="section-title collapsible" onclick="toggleSection(this)">
-                <span class="emoji">🛠️</span>Technical Skills
-            </h2>
-            <div class="section-content collapsible-content">
-                <ul class="skills-list">
-                    <li><strong>Languages:</strong> <span class="tooltip">Java 8/11/17<span class="tooltiptext">8+ years of Java development experience</span></span>, JavaScript, HTML, CSS.</li>
-                    <li><strong>Frameworks & Libraries:</strong> Spring Boot, Spring, React, TailwindCSS.</li>
-                    <li><strong>Database:</strong> <span class="tooltip">MySQL<span class="tooltiptext">Relational database expertise</span></span>, <span class="tooltip">MongoDB<span class="tooltiptext">NoSQL document database</span></span>.</li>
-                    <li><strong>Cloud & Containerization:</strong> <span class="tooltip">GCP<span class="tooltiptext">Google Cloud Platform</span></span>, Docker, Kubernetes.</li>
-                    <li><strong>Tools & Methodologies:</strong> Microservices Architecture, RESTful APIs, Git, Maven, JUnit, Mockito, CI/CD, Postman, Swagger.</li>
-                </ul>
+          <article class="case-card reveal">
+            <div class="case-index">02</div>
+            <div class="case-body">
+              <div class="case-meta">OPUS CONSULTING · 2021—2022</div>
+              <h3>Optimus Recon Pro <sup style="font-size: 0.4em;">©</sup></h3>
+              <p class="case-kicker">Making financial reconciliation understandable.</p>
+              <p>Worked on a back-office platform for data ingestion, reconciliation and reporting. I supported matching algorithms and the product itself, gaining a deeper view of how financial data becomes an operational workflow.</p>
+              <div class="tags"><span>Java</span><span>Reconciliation</span><span>Algorithms</span><span>Reporting</span></div>
             </div>
-        </section>
+          </article>
 
-        
-        <!-- Experience -->
-        <section class="section">
-            <h2 class="section-title collapsible" onclick="toggleSection(this)">
-                <span class="emoji">💼</span>Experience
-            </h2>
-            <div class="section-content collapsible-content">
-                
-                <div class="experience-item">
-                    <div class="job-header">
-                        <div class="job-title"><span class="emoji">🚀</span>Associate Sr. Software Developer | Publicis Sapient</div>
-                        <div class="company-period">[2022 – Present]</div>
-                    </div>
-                    <ul class="job-responsibilities">
-                        <li><span class="emoji">🎯</span>Led the development, maintenance, and documentation of the life cycle for critical investment and banking products for a major UK client (Lloyds Banking Group).</li>
-                        <li><span class="emoji">👥</span>Provided technical guidance and mentorship to junior developers on best practices, testing strategies, and API specification documentation.</li>
-                        <li><span class="emoji">⚡</span>Drove agile development and fostered team collaboration through active participation in Scrum ceremonies, contributing to consistent on-time delivery of features.</li>
-                    </ul>
-                    
-                    <div class="project-info">
-                        <div class="project-name"><span class="emoji">💰</span>MBNA Savings (March 2023 – Present):</div>
-                        <p>Developed and maintained backend services for a Fixed Term 1 Year banking product using Java 8/17, Spring 5.0, and Spring Boot 2.7/3.0.</p>
-                    </div>
-                    
-                    <div class="project-info">
-                        <div class="project-name"><span class="emoji">💳</span>BNPL Instalments Product (October 2022 – March 2023):</div>
-                        <p>Engineered robust backend solutions for a mobile-first Buy Now Pay Later (BNPL) instalment product, utilizing Java 11, Spring 5.0, and Spring Boot 2.5, hosted on GCP.</p>
-                    </div>
-                </div>
-
-                <div class="experience-item">
-                    <div class="job-header">
-                        <div class="job-title"><span class="emoji">⚙️</span>Sr. Technical Engineer | Opus Consulting</div>
-                        <div class="company-period">[2021 – 2022]</div>
-                    </div>
-                    <ul class="job-responsibilities">
-                        <li><span class="emoji">🔍</span>Gained comprehensive insights into diverse technologies and processes, including data ingestion, payment reconciliation, and financial reporting.</li>
-                        <li><span class="emoji">🤝</span>Collaborated directly with clients to understand requirements, define scope, and translate business needs into technical specifications.</li>
-                    </ul>
-                    
-                    <div class="project-info">
-                        <div class="project-name"><span class="emoji">📊</span>Optimus Recon Pro (August 2021 – July 2022):</div>
-                        <p>Contributed to the development of a SaaS, multi-tenant back-office suite, Optimus, providing solutions for Data Injection, Reconciliation, and Payment Insights using Java 8, Spring Boot 2.5, MongoDB, Docker, and Kubernetes.</p>
-                    </div>
-                </div>
-
-                <div class="experience-item">
-                    <div class="job-header">
-                        <div class="job-title"><span class="emoji">💻</span>Analyst, Software Developer | TIAA India | Pune, India</div>
-                        <div class="company-period">[2017 – 2021]</div>
-                    </div>
-                    <ul class="job-responsibilities">
-                        <li><span class="emoji">🌱</span>Developed foundational understanding of enterprise web applications, software development life cycles, and Scrum methodologies as a fresher.</li>
-                    </ul>
-                    
-                    <div class="project-info">
-                        <div class="project-name"><span class="emoji">🏦</span>Enterprise Payments Platform (February 2017 – July 2021):</div>
-                        <p>Played a key role in developing TIAA's internal payment platform for managing transfers across brokerage, retirement, and bank products.</p>
-                        <p style="margin-top: 8px;"><span class="emoji">☁️</span>Developed and deployed microservices and Mule proxies to the OpenShift cloud platform, utilizing Java 8, Spring Boot, and Spring Batch.</p>
-                    </div>
-                </div>
+          <article class="case-card reveal">
+            <div class="case-index">03</div>
+            <div class="case-body">
+              <div class="case-meta">PUBLICIS SAPIENT · 2022—2025</div>
+              <h3>Savings, Lloyds Banking Group</h3>
+              <p class="case-kicker">Growing from backend delivery into cloud product engineering.</p>
+              <p>Worked on the backend and cloud side of a UK banking savings product, translating business requirements into services and delivery work while operating inside a larger banking ecosystem.</p>
+              <div class="tags"><span>Java</span><span>Spring Boot</span><span>Cloud</span><span>Banking</span></div>
             </div>
-        </section>
+          </article>
 
-        <!-- Education -->
-        <section class="section">
-            <h2 class="section-title collapsible" onclick="toggleSection(this)">
-                <span class="emoji">🎓</span>Education
-            </h2>
-            <div class="section-content collapsible-content">
-                <div class="education-item">
-                    <div class="education-details"><span class="emoji">📜</span>PG Diploma in Advanced Computing | CDAC | India</div>
-                    <div class="education-year">2016 – 2017</div>
-                </div>
-                <div class="education-item">
-                    <div class="education-details"><span class="emoji">🎯</span>B.E. Computer Engineering | Mumbai University | India</div>
-                    <div class="education-year">2011 – 2016</div>
-                </div>
-                <div class="education-item">
-                    <div class="education-details"><span class="emoji">📚</span>H.S.C | Maharashtra State Board | India</div>
-                    <div class="education-year">2009 – 2011</div>
-                </div>
-                <div class="education-item">
-                    <div class="education-details"><span class="emoji">📖</span>S.S.C | Maharashtra State Board | India</div>
-                    <div class="education-year">2009</div>
-                </div>
+          <article class="case-card reveal">
+            <div class="case-index">04</div>
+            <div class="case-body">
+              <div class="case-meta">COFORGE · 2025—PRESENT</div>
+              <h3>Mortgages, Santander UK</h3>
+              <p class="case-kicker">From building features to making the team work.</p>
+              <p>Leading a team of five engineers building and supporting a UK mortgage product. I work across requirements, task breakdown, peer review, developer unblocking and release delivery—and built an internal mock-server utility to remove a recurring dependency on downstream APIs during development and testing.</p>
+              <div class="tags"><span>Technical Leadership</span><span>Full-stack</span><span>Mortgage</span><span>Developer Tooling</span></div>
             </div>
-        </section>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="lab" class="lab section">
+      <div class="container">
+        <div class="section-heading split-heading lab-heading reveal">
+          <div>
+            <p class="eyebrow">03 · LAB</p>
+            <h2>Things I build because<br>I think they should exist.</h2>
+          </div>
+          <p class="intro-copy">Small products, experiments and deliberately tiny systems. The common thread is simple: find a real workflow, remove friction, make it feel obvious.</p>
+        </div>
+
+        <div class="lab-grid">
+          <a class="lab-card lab-large reveal" href="https://family-social-flax.vercel.app/" target="_blank" rel="noreferrer">
+            <div class="lab-top"><span>KINKEEP</span><span style="background-color: #d4edda; color: #333; padding: 0.5rem; border-radius: 1rem; margin: 0.5rem;">SHIPPED PROTOTYPE</span></div>
+            <h3>Family Social</h3>
+            <p>A private social network for families—designed to feel calmer, smaller and more personal than a conventional social feed.</p>
+            <div class="lab-bottom"><span>Next.js</span><span>PostgreSQL</span><span>Auth</span><span>Product design</span><b>↗</b></div>
+          </a>
+
+          <a class="lab-card reveal" href="#eggspress">
+            <div class="lab-top"><span>EGGSPRESS</span><span style="background-color: #aad8fa; color: #333; padding: 0.5rem; border-radius: 1rem; margin: 0.5rem;">BUILDING</span></div>
+            <h3>A tiny app for a real business.</h3>
+            <p>Simple order management for an egg wholesaler handling different egg types and recurring local demand.</p>
+            <div class="lab-bottom"><span>Workflow</span><span>Operations</span><b>↗</b></div>
+          </a>
+
+          <a class="lab-card reveal" href="#bank">
+            <div class="lab-top"><span>BANK</span><span style="background-color: #f5ff3cd5; color: #333; padding: 0.5rem; border-radius: 1rem; margin: 0.5rem;">PROTOTYPE</span></div>
+            <h3>A bank where Git commits are currency.</h3>
+            <p>A small, playful system using GCR—Git Commit Currency—to explore developer-native product metaphors.</p>
+            <div class="lab-bottom"><span>Experiment</span><span>Interface</span><b>↗</b></div>
+          </a>
+
+          <a class="lab-card reveal" href="#wifi-chat">
+            <div class="lab-top"><span>WIFI CHAT</span><span style="background-color: #f5ff3cd5; color: #333; padding: 0.5rem; border-radius: 1rem; margin: 0.5rem;">PROTOTYPE</span></div>
+            <h3>Collaboration on the same network.</h3>
+            <p>A lightweight local-network experiment for spontaneous chat and collaboration without a cloud account.</p>
+            <div class="lab-bottom"><span>Networking</span><span>Experiment</span><b>↗</b></div>
+          </a>
+
+          <a class="lab-card reveal" href="#two-d-planner">
+            <div class="lab-top"><span>2D PLANNER</span><span style="background-color: #f5ff3cd5; color: #333; padding: 0.5rem; border-radius: 1rem; margin: 0.5rem;">PROTOTYPE</span></div>
+            <h3>Planning space without the technical overhead.</h3>
+            <p>A simple floor-planning experiment focused on making spatial planning feel familiar and approachable.</p>
+            <div class="lab-bottom"><span>UI</span><span>Spatial thinking</span><b>↗</b></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="story section">
+      <div class="container story-grid">
+        <div class="story-title reveal">
+          <p class="eyebrow">04 · THE THREAD</p>
+          <h2>From moving money<br>to moving teams.</h2>
+        </div>
+        <div class="timeline reveal reveal-delay-1">
+          <div class="timeline-item"><span>2017</span><div><b>Payments</b><p>Learned how complex financial systems actually behave.</p></div></div>
+          <div class="timeline-item"><span>2021</span><div><b>Reconciliation</b><p>Started thinking in business workflows, algorithms and operational systems.</p></div></div>
+          <div class="timeline-item"><span>2022</span><div><b>Banking + Cloud</b><p>Moved into larger product ecosystems and end-to-end delivery.</p></div></div>
+          <div class="timeline-item"><span>2025</span><div><b>Technical Leadership</b><p>Started thinking not only about the system, but about how a team builds the system.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about section">
+      <div class="container about-grid">
+        <div class="section-heading reveal">
+          <p class="eyebrow">05 · ABOUT</p>
+          <h2>The engineer I am<br>trying to become.</h2>
+        </div>
+        <div class="about-copy reveal reveal-delay-1">
+          <p>I want to be the engineer who can walk into a messy business, understand what actually matters, and turn it into a simple product.</p>
+          <p>I enjoy backend systems, product thinking, legacy software, developer tooling and the strange space between an idea and a working thing.</p>
+          <p>More recently, I've been experimenting with AI not as a replacement for judgement, but as a way to make planning, analysis and engineering work more deliberate.</p>
+          <blockquote>“Useful over impressive.”</blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact section">
+      <div class="container contact-panel reveal">
+        <div>
+          <p class="eyebrow">06 · CONTACT</p>
+          <h2>Let's make<br>something simpler.</h2>
+        </div>
+        <div class="contact-side">
+          <p>For interesting engineering problems, product work, or a conversation about building useful things.</p>
+          <a class="contact-email" href="mailto:mayurravindram@gmail.com">mayurravindram@gmail.com <span>↗</span></a>
+          <div class="socials">
+            <a href="https://github.com/mayurravindram" target="_blank" rel="noreferrer">GitHub</a>
+            <a href="https://www.linkedin.com/in/mayurravindram" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="resume.html">Résumé</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="project-drawer" id="kinkeep" hidden>
+      <div class="drawer-backdrop" data-close></div>
+      <aside class="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title-kinkeep">
+        <button class="drawer-close" type="button" data-close aria-label="Close">×</button>
+        <p class="eyebrow">LAB · KINKEEP</p>
+        <h2 id="drawer-title-kinkeep">Family Social</h2>
+        <p>A private social network for families, built as an independent product experiment.</p>
+        <div class="drawer-grid"><span>Role</span><b>Product + Engineering</b><span>Stack</span><b>Next.js · PostgreSQL</b><span>Status</span><b>Working prototype</b></div>
+        <p class="drawer-note">This project is intentionally small: identity, family boundaries, posts, comments, media and a quiet feed. The point is to practice taking an idea from product intuition through architecture, UX and deployment.</p>
+        <a class="button button-dark" href="https://mayur-ravindram.github.io/portfolio/" target="_blank" rel="noreferrer">View current project <span>↗</span></a>
+      </aside>
     </div>
 
-    <script>
-        function toggleSection(element) {
-            const content = element.nextElementSibling;
-            const isCollapsed = element.classList.contains('collapsed');
-            
-            if (isCollapsed) {
-                element.classList.remove('collapsed');
-                content.classList.remove('hidden');
-            } else {
-                element.classList.add('collapsed');
-                content.classList.add('hidden');
-            }
-        }
+    <div class="project-drawer" id="eggspress" hidden><div class="drawer-backdrop" data-close></div><aside class="drawer" role="dialog" aria-modal="true"><button class="drawer-close" type="button" data-close>×</button><p class="eyebrow">LAB · EGGSPRESS</p><h2>A tiny app for a real business.</h2><p>A workflow experiment for an egg wholesaler: simple order capture, product variants and operational clarity.</p><div class="drawer-grid"><span>Status</span><b>Work in progress</b><span>Theme</span><b>Small-business software</b></div></aside></div>
+    <div class="project-drawer" id="bank" hidden><div class="drawer-backdrop" data-close></div><aside class="drawer" role="dialog" aria-modal="true"><button class="drawer-close" type="button" data-close>×</button><p class="eyebrow">LAB · BANK</p><h2>A bank where Git commits are currency.</h2><p>A playful prototype exploring how familiar financial interactions change when the unit of value is a developer-native concept.</p><div class="drawer-grid"><span>Status</span><b>Working prototype</b><span>Concept</span><b>GCR · Git Commit Currency</b></div></aside></div>
+    <div class="project-drawer" id="wifi-chat" hidden><div class="drawer-backdrop" data-close></div><aside class="drawer" role="dialog" aria-modal="true"><button class="drawer-close" type="button" data-close>×</button><p class="eyebrow">LAB · WIFI CHAT</p><h2>Collaboration on the same network.</h2><p>A local-network experiment for lightweight communication without needing a shared cloud account.</p><div class="drawer-grid"><span>Status</span><b>Working prototype</b><span>Theme</span><b>Local networking</b></div></aside></div>
+    <div class="project-drawer" id="two-d-planner" hidden><div class="drawer-backdrop" data-close></div><aside class="drawer" role="dialog" aria-modal="true"><button class="drawer-close" type="button" data-close>×</button><p class="eyebrow">LAB · 2D PLANNER</p><h2>Planning space without the overhead.</h2><p>A floor-planning experiment focused on intuitive spatial editing and regional terminology.</p><div class="drawer-grid"><span>Status</span><b>Working prototype</b><span>Theme</span><b>Spatial UI</b></div></aside></div>
+  </main>
 
-        // Initialize all sections as expanded
-        document.addEventListener('DOMContentLoaded', function() {
-            const collapsibles = document.querySelectorAll('.collapsible');
-            collapsibles.forEach(function(collapsible) {
-                collapsible.classList.remove('collapsed');
-            });
-        });
-    </script>
+  <footer class="site-footer">
+    <div class="container footer-wrap"><span>© <span data-year></span> Mayur Ravindra</span><span>Built with vanilla HTML, CSS &amp; JavaScript. Simple!</span></div>
+  </footer>
+
+  <script src="js/theme.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
