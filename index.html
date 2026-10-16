@@ -20,17 +20,24 @@
   <header class="site-header" data-header>
     <div class="container nav-wrap">
       <a class="brand" href="#top" aria-label="Mayur Ravindra home">MR<span>.</span></a>
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation">
-        <span></span><span></span>
-      </button>
-      <nav id="site-nav" class="site-nav" aria-label="Primary">
-        <a href="#work">Work</a>
-        <a href="#lab">Lab</a>
-        <a href="#thinking">Thinking</a>
-        <a href="#about">About</a>
-        <a class="nav-cta" href="resume.html">Résumé</a>
-        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark theme" aria-pressed="false"><span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">Dark</span></button>
-      </nav>
+      <div class="nav-cluster">
+        <nav id="site-nav" class="site-nav" aria-label="Primary">
+          <a href="#work">Work</a>
+          <a href="#lab">Lab</a>
+          <a href="#thinking">Thinking</a>
+          <a href="#about">About</a>
+          <a class="nav-cta" href="resume.html">Résumé</a>
+        </nav>
+        <div class="header-actions">
+          <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark theme" aria-pressed="false">
+            <span class="theme-icon" aria-hidden="true"></span>
+            <span class="theme-label">Dark</span>
+          </button>
+          <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation">
+            <span></span><span></span>
+          </button>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -260,17 +267,19 @@
         <span class="footer-sep">·</span>
         <span>Built with vanilla HTML, CSS &amp; JavaScript. Simple!</span>
       </div>
-      <div class="mini-insight" id="mini-insight" role="status" aria-label="Page visitor insights" title="Page visits recorded in real time • Click to refresh">
+      <a class="mini-insight" id="mini-insight" href="analytics.html" role="status" aria-label="Page visitor insights" title="Page visits recorded in real time • Click to open private analytics dashboard (or press Ctrl+Shift+A)">
         <span class="insight-pulse" aria-hidden="true"></span>
         <span class="insight-label">Mini insight</span>
         <span class="insight-divider" aria-hidden="true">/</span>
         <span class="insight-count" id="visitor-count" aria-live="polite">—</span>
         <span class="insight-unit">visits</span>
-      </div>
+      </a>
     </div>
   </footer>
 
   <script src="js/theme.js"></script>
+  <script src="js/analytics-tracker.js"></script>
   <script src="js/main.js"></script>
+  <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "__CF_BEACON_TOKEN__"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>

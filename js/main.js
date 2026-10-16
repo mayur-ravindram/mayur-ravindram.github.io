@@ -77,6 +77,13 @@
         }
       });
     });
+
+    document.addEventListener('click', (event) => {
+      if (siteNav.classList.contains('open') && !siteNav.contains(event.target) && !menuToggle.contains(event.target)) {
+        siteNav.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
   }
 
   const observer = new IntersectionObserver((entries) => {
@@ -155,7 +162,7 @@
     const updateDisplay = (value) => {
       const formatted = Number(value).toLocaleString();
       countEl.textContent = formatted;
-      miniInsight.setAttribute('title', `Page visits recorded: ${formatted} • Click to refresh`);
+      miniInsight.setAttribute('title', `Page visits: ${formatted} • Click to open private analytics dashboard (or press Ctrl+Shift+A)`);
       try {
         localStorage.setItem(cacheKey, String(value));
       } catch (_) {}
@@ -183,11 +190,16 @@
         })
         .catch(() => {
           if (timeoutId) clearTimeout(timeoutId);
-          // Fallback to cache if still placeholder
+          // Fallback to local analytics or cache if still placeholder
           if (countEl.textContent === '—' || countEl.textContent === '') {
             try {
-              const cached = localStorage.getItem(cacheKey);
-              countEl.textContent = cached ? Number(cached).toLocaleString() : '1+';
+              const localVisits = window.MRAnalytics ? window.MRAnalytics.getData().summary.totalVisits : null;
+              if (localVisits && localVisits > 0) {
+                updateDisplay(localVisits);
+              } else {
+                const cached = localStorage.getItem(cacheKey);
+                countEl.textContent = cached ? Number(cached).toLocaleString() : '1+';
+              }
             } catch (_) {
               countEl.textContent = '1+';
             }
@@ -196,20 +208,6 @@
     };
 
     fetchCount(endpoint, shouldIncrement);
-
-    // Allow user to click the mini insight to refresh current count
-    miniInsight.addEventListener('click', () => {
-      countEl.style.opacity = '0.5';
-      fetch(`https://countapi.mileshilliard.com/api/v1/get/${counterKey}`)
-        .then((res) => res.json())
-        .then((data) => {
-          if (typeof data.value === 'number') updateDisplay(data.value);
-        })
-        .catch(() => {})
-        .finally(() => {
-          countEl.style.opacity = '1';
-        });
-    });
   };
 
   initVisitorInsight();
