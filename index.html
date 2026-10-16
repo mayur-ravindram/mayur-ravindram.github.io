@@ -254,7 +254,20 @@
   </main>
 
   <footer class="site-footer">
-    <div class="container footer-wrap"><span>© <span data-year></span> Mayur Ravindra</span><span>Built with vanilla HTML, CSS &amp; JavaScript. Simple!</span></div>
+    <div class="container footer-wrap">
+      <div class="footer-meta">
+        <span>© <span data-year></span> Mayur Ravindra</span>
+        <span class="footer-sep">·</span>
+        <span>Built with vanilla HTML, CSS &amp; JavaScript. Simple!</span>
+      </div>
+      <div class="mini-insight" id="mini-insight" role="status" aria-label="Page visitor insights" title="Page visits recorded in real time • Click to refresh">
+        <span class="insight-pulse" aria-hidden="true"></span>
+        <span class="insight-label">Mini insight</span>
+        <span class="insight-divider" aria-hidden="true">/</span>
+        <span class="insight-count" id="visitor-count" aria-live="polite">—</span>
+        <span class="insight-unit">visits</span>
+      </div>
+    </div>
   </footer>
 
   <script src="js/theme.js"></script>
