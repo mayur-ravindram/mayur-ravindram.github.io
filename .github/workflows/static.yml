@@ -33,6 +33,13 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      - name: Inject Cloudflare Analytics Token
+        env:
+          CF_TOKEN: ${{ secrets.CF_BEACON_TOKEN }}
+        run: |
+          if [ -n "$CF_TOKEN" ]; then 
+            sed -i "s/__CF_BEACON_TOKEN__/$CF_TOKEN/g" *.html
+          fi
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
